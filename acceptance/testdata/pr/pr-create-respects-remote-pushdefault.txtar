@@ -19,12 +19,12 @@ defer gh repo delete --yes ${ORG}/${REPO}
 
 # Create a user fork of repository. This will be owned by USER.
 exec gh repo fork ${ORG}/${REPO} --fork-name ${FORK}
+sleep 5
 
 # Defer repo cleanup of fork
 defer gh repo delete --yes ${USER}/${FORK}
 
 # Retrieve fork repository information
-sleep 5
 exec gh repo view ${USER}/${FORK} --json id --jq '.id'
 stdout2env FORK_ID
 
